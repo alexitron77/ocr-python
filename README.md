@@ -21,7 +21,7 @@ The project uses FastApi to implement an API to run tesseract image processing. 
 To start the api, run:
 
 ```
-uvicorn main:<app> --relaod
+uvicorn main:<app> --reload
 ```
 
 <app> should be rename by the name of the variable from which FastApi() is called in your code.
