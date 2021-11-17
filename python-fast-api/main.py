@@ -3,8 +3,11 @@ from typing import List
 from pydantic import BaseModel
 import time
 import asyncio 
-import ocr 
-import utils
+import api.ocr 
+import commons.utils
+import uvicorn 
+from db.session import session, engine
+from models.base import Base
 
 app = FastAPI()
 
@@ -18,3 +21,8 @@ async def imageToText(images: List[UploadFile] = File(...)):
 	res = await asyncio.gather(*task)
 	end_time = time.time()
 	return {"response": res, "time_elapsed": (end_time - start_time)}	
+
+if __name__ == "__main__":
+	Base.metadata.create_all(bind=engine)
+	uvicorn.run(app, host="0.0.0.0", port=8001)
+
